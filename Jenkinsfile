@@ -9,16 +9,18 @@ pipeline {
 echo \'test\''''
           }
         }
-        stage('build') {
+        stage('Init Git submodules') {
           steps {
-            sh '''pwd
-mkdir build
-cd build
-cmake ..
-make 
-'''
+            sh '''# Init Git submodules
+git submodule init
+git submodule update'''
           }
         }
+      }
+    }
+    stage('run-clang-tidy') {
+      steps {
+        sh 'echo test'
       }
     }
   }
